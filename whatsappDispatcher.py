@@ -19,3 +19,13 @@ for i in range(2, numbers_sheet.max_row):
     was_contacted = numbers_sheet.cell(row=i, column=5).value
     if not num == None and num not in archived_nums and not was_contacted == "x":
         numbers_to_contact.append(num)
+
+for number in numbers_to_contact:
+    for i in range(2, numbers_sheet.max_row):
+        cell_num = numbers_sheet.cell(row=i, column=2).value
+        if number == cell_num:
+            print("Sending a text to '" + number + "'....")
+            pywhatkit.sendwhatmsg_instantly(number, msg)
+            time.sleep(1)
+            pyautogui.click()
+            pyautogui.hotkey("command", "w")
